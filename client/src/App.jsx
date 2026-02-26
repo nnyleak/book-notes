@@ -36,9 +36,7 @@ function App() {
               />
             )}
             <h2>{b.title}</h2>
-            <p>
-              <strong>{books.author}</strong>
-            </p>
+            {b.author_name && <p className="author">{b.author_name}</p>}
             {b.description && <p className="description">{b.description}</p>}
           </div>
         ))}

@@ -45,19 +45,46 @@ app.get("/books/:id", async (req, res) => {
     }
 
     let olData = null;
+    let workData = null;
+    let authorData = null;
+
+    // fetch book using isbn
     if (book.isbn) {
       const olResp = await fetch(
         `https://openlibrary.org/isbn/${book.isbn}.json`,
       );
       if (olResp.ok) {
         olData = await olResp.json();
+
+        // extract works olid and its data
+        if (olData.works && olData.works.length > 0) {
+          const workKey = olData.works[0].key; // "/works/workskey"
+
+          const workResp = await fetch(`https://openlibrary.org${workKey}.json`);
+          if (workResp.ok) {
+            workData = await workResp.json();
+          }
+        }
+
+        if (olData.authors && olData.authors.length > 0) {
+          const authorKey = olData.authors[0].key; // "authors/authorskey"
+
+          const authorResp = await fetch(
+            `https://openlibrary.org${authorKey}.json`,
+          );
+          if (authorResp.ok) {
+            authorData = await authorResp.json();
+          }
+        }
       }
     }
 
     res.json({
       ...book,
-      description: olData?.description?.value || book.description,
+      title: olData?.title || book.title,
+      description: workData?.description?.value || workData?.description || "description not available",
       cover_id: olData?.covers?.[0],
+      author_name: authorData?.name || "author not available",
     });
   } catch (err) {
     console.error(err);
