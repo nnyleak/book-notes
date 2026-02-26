@@ -2,8 +2,61 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+h1 {
   text-align: center;
 }
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.book-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.book-card h2 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.book-card p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #888;
+}
+
+
+
+
+
+
+
 
 .logo {
   height: 6em;

@@ -32,6 +32,39 @@ app.get("/books", async (req, res) => {
   }
 });
 
+app.get("/books/:id", async (req, res) => {
+  const bookId = req.params.id;
+  try {
+    const result = await db.query("SELECT * FROM books WHERE id = $1", [
+      bookId,
+    ]);
+    const book = result.rows[0];
+
+    if (!book) {
+      return res.status(404).json({ error: "book not found" });
+    }
+
+    let olData = null;
+    if (book.isbn) {
+      const olResp = await fetch(
+        `https://openlibrary.org/isbn/${book.isbn}.json`,
+      );
+      if (olResp.ok) {
+        olData = await olResp.json();
+      }
+    }
+
+    res.json({
+      ...book,
+      description: olData?.description?.value || book.description,
+      cover_id: olData?.covers?.[0],
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "failed to retrieve book details" });
+  }
+});
+
 app.get("/search", async (req, res) => {
   const { q } = req.query;
   try {

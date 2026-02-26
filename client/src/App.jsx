@@ -14,20 +14,43 @@ function App() {
 
   useEffect(() => {
     axios.get("http://localhost:3000/books").then((res) => {
-      setBooks(res.data);
+      const bookDetailsPromises = res.data.map((b) =>
+        axios
+          .get(`http://localhost:3000/books/${b.id}`)
+          .then((res) => res.data),
+      );
+      Promise.all(bookDetailsPromises).then(setBooks);
     });
   }, []);
 
   return (
     <div>
-      <h1>book archive</h1>
-      <ul>
+      <h1>kae.archive</h1>
+      <div className="books-grid">
+        {books.map((b) => (
+          <div key={b.id} className="book-card">
+            {b.cover_id && (
+              <img
+                src={`https://covers.openlibrary.org/b/id/${b.cover_id}-M.jpg`}
+                alt={`${b.title} cover`}
+              />
+            )}
+            <h2>{b.title}</h2>
+            <p>
+              <strong>{books.author}</strong>
+            </p>
+            {b.description && <p className="description">{b.description}</p>}
+          </div>
+        ))}
+      </div>
+
+      {/* <ul>
         {books.map((b) => (
           <li key={b.id}>
             {b.title} - {b.author}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }
