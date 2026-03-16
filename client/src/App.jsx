@@ -31,7 +31,7 @@ function App() {
           <div key={b.id} className="book-card">
             {b.cover_id && (
               <img
-                src={`https://covers.openlibrary.org/b/id/${b.cover_id}-M.jpg`}
+                src={`https://covers.openlibrary.org/b/id/${b.cover_id}-L.jpg`}
                 alt={`${b.title} cover`}
               />
             )}
@@ -41,14 +41,6 @@ function App() {
           </div>
         ))}
       </div>
-
-      {/* <ul>
-        {books.map((b) => (
-          <li key={b.id}>
-            {b.title} - {b.author}
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 }
