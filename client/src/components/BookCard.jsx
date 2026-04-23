@@ -1,3 +1,5 @@
+import "./BookCard.css";
+
 function BookCard({book, onClick}) {
   return (
     <div className="book-card">
@@ -9,6 +11,7 @@ function BookCard({book, onClick}) {
       )}
       <h2>{book.title}</h2>
       {book.author_name && <p className="author">by {book.author_name}</p>}
+      {book.rating && <p className="rating">rating: {book.rating}</p>}
       <button onClick={onClick}>read my thoughts!</button>
     </div>
   );

@@ -10,22 +10,10 @@ h1 {
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.book-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.book-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 .book-card img {
@@ -45,11 +33,11 @@ h1 {
   color: #555;
 }
 
-.description {
+/* .description {
   font-size: 0.9rem;
   line-height: 1.4;
   color: #888;
-}
+} */
 
 .rating {
   font-weight: bold;

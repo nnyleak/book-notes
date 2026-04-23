@@ -1,43 +1,59 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { use } from "react";
+import { getToken } from "../auth";
 
 function EditBook() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    rating: "",
-    review: "",
-    date_finished: "",
-  });
+  const [book, setBook] = useState(null);
+  const [rating, setRating] = useState("");
+  const [review, setReview] = useState("");
+  const [dateFinished, setDateFinished] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/books/${id}`)
-      .then((res) => setForm(res.data));
+    axios.get(`http://localhost:3000/books/${id}`).then((res) => {
+      const data = res.data;
+      setBook(data);
+
+      setRating(data.rating || "");
+      setReview(data.review || "");
+      setDateFinished(data.date_finished?.slice(0, 10) || "");
+    });
   }, [id]);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios.put(`http://localhost:3000/books/${id}`, form)
-    .then(() => navigate(`/book/${id}`))
-    .catch((err) => console.error(err));
+  const handleSubmit = async () => {
+    await axios
+      .put(`http://localhost:3000/books/${id}`, {
+        rating,
+        review,
+        date_finished: dateFinished,
+      }, {
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+        }
+      })
+      .then(() => navigate(`/book/${id}`))
+      .catch((err) => console.error(err));
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <input name="rating" value={form.rating} onChange={handleChange} />
-        <textarea name="review" value={form.review} onChange={handleChange} />
-        <input name="date_finished" value={form.date_finished} onChange={handleChange} />
-        <button type="submit">save</button>
-    </form>
+    <div onSubmit={handleSubmit}>
+      <input
+        type="number"
+        value={rating}
+        onChange={(e) => setRating(e.target.value)}
+      />
+      <textarea value={review} onChange={(e) => setReview(e.target.value)} />
+      <input
+        type="date"
+        value={dateFinished}
+        onChange={(e) => setDateFinished(e.target.value)}
+      />
+      <button type="submit" onClick={handleSubmit}>save</button>
+      <button type="submit" onClick={() => navigate(`/book/${id}`)}>cancel</button>
+    </div>
   );
 }
 

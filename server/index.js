@@ -2,9 +2,12 @@ import express from "express";
 import cors from "cors";
 import pg from "pg";
 import fetch from "node-fetch";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 const app = express();
 const port = 3000;
+const SECRET = "this_is_a_secret"; // in production, use a more secure method to store secrets
 
 const db = new pg.Client({
   user: process.env.PG_USER || "postgres",
@@ -14,6 +17,24 @@ const db = new pg.Client({
   port: process.env.PG_PORT ? +process.env.PG_PORT : 5433,
 });
 db.connect();
+
+const auth = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({ error: "no token" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const user = jwt.verify(token, SECRET);
+    req.user = user;
+    next();
+  } catch {
+    return res.status(401).json({ error: "invalid token" });
+  }
+}
 
 app.use(cors());
 app.use(express.json());
@@ -46,6 +67,43 @@ app.get("/books/:id", async (req, res) => {
     res.status(500).json({ error: "failed to retrieve book details" });
   }
 });
+
+app.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+
+  const hashed = await bcrypt.hash(password, 10);
+
+  const result = await db.query(
+    "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",
+    [username, hashed]
+  );
+
+  res.json(result.rows[0]);
+})
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  const result = await db.query(
+    "SELECT * FROM users WHERE username = $1",
+    [username]
+  );
+
+  const user = result.rows[0];
+
+  if (!user) {
+    return res.status(401).json({ error: "user not found" });
+  }
+
+  const valid = await bcrypt.compare(password, user.password);
+
+  if (!valid) {
+    return res.status(401).json({ error: "invalid password" });
+  }
+
+  const token = jwt.sign({ userId: user.id}, SECRET);
+  res.json({ token });
+})
 
 app.post("/books/preview", async (req, res) => {
   const { isbn } = req.body;
@@ -97,7 +155,7 @@ app.post("/books/preview", async (req, res) => {
   }
 });
 
-app.post("/books", async (req, res) => {
+app.post("/books", auth, async (req, res) => {
   const { isbn, title, author_name, description, cover_url, rating, review, date_finished } = req.body;
   try {
     const result = await db.query(
@@ -112,7 +170,7 @@ app.post("/books", async (req, res) => {
 });
 
 // edit thoughts on book
-app.put("/books/:id", async (req, res) => {
+app.put("/books/:id", auth, async (req, res) => {
   const { rating, review, date_finished } = req.body;
 
   try {
@@ -131,7 +189,7 @@ app.put("/books/:id", async (req, res) => {
 });
 
 // delete entries
-app.delete("/books/:id", async (req, res) => {
+app.delete("/books/:id", auth, async (req, res) => {
   try {
     await db.query("DELETE FROM books WHERE id = $1", [req.params.id]);
     res.json({ message: "book deleted" });

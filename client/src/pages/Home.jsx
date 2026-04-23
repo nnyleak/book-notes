@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./Home.css";
 import BookCard from "../components/BookCard";
+import Nav from "../components/Nav";
+import { isLoggedIn, logout } from "../auth";
+import "./Home.css";
 
 function Home() {
   const navigate = useNavigate();
@@ -36,8 +38,7 @@ function Home() {
 
   return (
     <div>
-      <h1>kae.archive</h1>
-      <button onClick={() => navigate("/add")}>add a book</button>
+      <Nav />
       <div className="books-grid">
         {books.map((b) => (
           <BookCard

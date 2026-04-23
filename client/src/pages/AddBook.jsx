@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getToken, isLoggedIn } from "../auth";
 
 function AddBook() {
   const [isbn, setIsbn] = useState("");
@@ -33,17 +34,25 @@ function AddBook() {
 
   const handleAdd = async () => {
     try {
-      await axios.post("http://localhost:3000/books", {
-        isbn,
-        ...bookData,
-        rating,
-        review,
-        date_finished: dateFinished,
-      });
+      await axios.post(
+        "http://localhost:3000/books",
+        {
+          isbn,
+          ...bookData,
+          rating: Number(rating),
+          review,
+          date_finished: dateFinished || null,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        },
+      );
 
       navigate("/");
     } catch (err) {
-      console.error(err.response?.data || err.message);
+      console.error(err.response);
       alert("failed to add book");
     }
   };

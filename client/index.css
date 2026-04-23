@@ -1,4 +1,23 @@
 :root {
+  font-family: monospace;
+}
+
+button {
+  font-family: monospace;
+  display: block;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 6px 0;
+  cursor: pointer;
+  color: #222;
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +84,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

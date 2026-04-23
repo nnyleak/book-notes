@@ -1,0 +1,11 @@
+.book-card {
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  padding: 14px;
+  background: #fafafa;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
