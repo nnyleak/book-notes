@@ -25,7 +25,7 @@ function BookDetails() {
   return (
     <div>
       <img
-        src={`https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`}
+        src={book.cover_url}
         alt={`${book.title} cover`}
       />
       <h1>{book.title}</h1>
@@ -34,6 +34,11 @@ function BookDetails() {
       <p>{book.description}</p>
       <h3>My Thoughts:</h3>
       <p>{book.rating}/5</p>
+      <p>{book.date_finished && new Date(book.date_finished).toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })}</p>
       <p>{book.review || "no review yet"}</p>
       <button onClick={() => navigate(`/book/${id}/edit`)}>edit entry</button>
       <button onClick={handleDelete}>delete entry</button>

@@ -1,9 +1,9 @@
 function BookCard({book, onClick}) {
   return (
     <div className="book-card">
-      {book.cover_id && (
+      {book.cover_url && (
         <img
-          src={`https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`}
+          src={book.cover_url}
           alt={`${book.title} cover`}
         />
       )}

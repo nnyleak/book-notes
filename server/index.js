@@ -80,6 +80,8 @@ app.post("/books/preview", async (req, res) => {
       }
     }
 
+    const coverData = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+
     res.json({
       title: olData.title || "unknown title",
       author_name: authorData?.name || "unknown author",
@@ -87,7 +89,7 @@ app.post("/books/preview", async (req, res) => {
         workData?.description?.value ||
         workData?.description ||
         "description not available",
-      cover_id: olData?.covers?.[0] || null,
+      cover_url: coverData || null,
     });
   } catch (err) {
     console.error(err);
@@ -96,11 +98,11 @@ app.post("/books/preview", async (req, res) => {
 });
 
 app.post("/books", async (req, res) => {
-  const { isbn, title, author_name, description, cover_id } = req.body;
+  const { isbn, title, author_name, description, cover_url, rating, review, date_finished } = req.body;
   try {
     const result = await db.query(
-      "INSERT INTO books(isbn, title, author_name, description, cover_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [isbn, title, author_name, description, cover_id],
+      "INSERT INTO books(isbn, title, author_name, description, cover_url, rating, review, date_finished) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      [isbn, title, author_name, description, cover_url, rating, review, date_finished],
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
