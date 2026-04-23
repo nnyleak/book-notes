@@ -18,10 +18,6 @@ db.connect();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hello from server!");
-});
-
 app.get("/books", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM books");
@@ -44,79 +40,102 @@ app.get("/books/:id", async (req, res) => {
       return res.status(404).json({ error: "book not found" });
     }
 
-    let olData = null;
-    let workData = null;
-    let authorData = null;
-
-    // fetch book using isbn
-    if (book.isbn) {
-      const olResp = await fetch(
-        `https://openlibrary.org/isbn/${book.isbn}.json`,
-      );
-      if (olResp.ok) {
-        olData = await olResp.json();
-
-        // extract works olid and its data
-        if (olData.works && olData.works.length > 0) {
-          const workKey = olData.works[0].key; // "/works/workskey"
-
-          const workResp = await fetch(`https://openlibrary.org${workKey}.json`);
-          if (workResp.ok) {
-            workData = await workResp.json();
-          }
-        }
-
-        if (olData.authors && olData.authors.length > 0) {
-          const authorKey = olData.authors[0].key; // "authors/authorskey"
-
-          const authorResp = await fetch(
-            `https://openlibrary.org${authorKey}.json`,
-          );
-          if (authorResp.ok) {
-            authorData = await authorResp.json();
-          }
-        }
-      }
-    }
-
-    res.json({
-      ...book,
-      title: olData?.title || book.title,
-      description: workData?.description?.value || workData?.description || "description not available",
-      cover_id: olData?.covers?.[0],
-      author_name: authorData?.name || "author not available",
-    });
+    res.json(book);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "failed to retrieve book details" });
   }
 });
 
-app.get("/search", async (req, res) => {
-  const { q } = req.query;
+app.post("/books/preview", async (req, res) => {
+  const { isbn } = req.body;
+
   try {
-    const resp = await fetch(
-      `https://openlibrary.org/search.json?q=${encodeURIComponent(q)}`,
-    );
-    const json = await resp.json();
-    res.json(json.docs);
+    const olResp = await fetch(`https://openlibrary.org/isbn/${isbn}.json`);
+
+    if (!olResp.ok) {
+      return res.status(400).json({ error: "invalid isbn or book not found" });
+    }
+
+    const olData = await olResp.json();
+
+    let workData = null;
+    let authorData = null;
+
+    if (olData.works?.length > 0) {
+      const workKey = olData.works[0].key;
+      const workResp = await fetch(`https://openlibrary.org${workKey}.json`);
+      if (workResp.ok) {
+        workData = await workResp.json();
+      }
+    }
+
+    if (olData.authors?.length > 0) {
+      const authorKey = olData.authors[0].key;
+      const authorResp = await fetch(
+        `https://openlibrary.org${authorKey}.json`,
+      );
+      if (authorResp.ok) {
+        authorData = await authorResp.json();
+      }
+    }
+
+    res.json({
+      title: olData.title || "unknown title",
+      author_name: authorData?.name || "unknown author",
+      description:
+        workData?.description?.value ||
+        workData?.description ||
+        "description not available",
+      cover_id: olData?.covers?.[0] || null,
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "failed to search books" });
+    return res.status(400).json({ error: "preview failed" });
   }
 });
 
 app.post("/books", async (req, res) => {
-  const { title, author, isbn } = req.body;
+  const { isbn, title, author_name, description, cover_id } = req.body;
   try {
     const result = await db.query(
-      "INSERT INTO books (title, author, description) VALUES ($1, $2, $3) RETURNING *",
-      [title, author, isbn],
+      "INSERT INTO books(isbn, title, author_name, description, cover_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [isbn, title, author_name, description, cover_id],
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "failed to add book" });
+  }
+});
+
+// edit thoughts on book
+app.put("/books/:id", async (req, res) => {
+  const { rating, review, date_finished } = req.body;
+
+  try {
+    const result = await db.query(
+      `UPDATE books
+      SET rating = $1, review = $2, date_finished = $3
+      WHERE id = $4
+      RETURNING *`,
+      [rating, review, date_finished, req.params.id],
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "failed to update book" });
+  }
+});
+
+// delete entries
+app.delete("/books/:id", async (req, res) => {
+  try {
+    await db.query("DELETE FROM books WHERE id = $1", [req.params.id]);
+    res.json({ message: "book deleted" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "failed to delete book" });
   }
 });
 
