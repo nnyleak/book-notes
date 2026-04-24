@@ -4,15 +4,17 @@ function BookCard({book, onClick}) {
   return (
     <div className="book-card">
       {book.cover_url && (
-        <img
+        <img className="cover"
           src={book.cover_url}
           alt={`${book.title} cover`}
         />
       )}
-      <h2>{book.title}</h2>
-      {book.author_name && <p className="author">by {book.author_name}</p>}
-      {book.rating && <p className="rating">rating: {book.rating}</p>}
-      <button onClick={onClick}>read my thoughts!</button>
+      <div className="card-content">
+        <h2 className="title">{book.title}</h2>
+        {book.author_name && <p className="author">by {book.author_name}</p>}
+        {book.rating && <p className="rating">rating: {book.rating}</p>}
+        <button onClick={onClick}>read my thoughts!</button>
+      </div>
     </div>
   );
 }

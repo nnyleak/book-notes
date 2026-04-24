@@ -1,10 +1,13 @@
 .sidebar {
   width: 190px;
-  border-right: 2px solid #ddd;
+  border-right: 1px solid black;
   padding: 20px;
 }
 
 .folder {
   color: #777;
-  margin-top: 20px;
+}
+
+.nav-group button {
+  margin-left: 2rem;
 }
