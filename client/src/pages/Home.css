@@ -4,11 +4,20 @@
   padding: 2rem;
 }
 
-.books-grid {
+/* .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
-  justify-content: start;
-  gap:0;
+  grid-auto-flow: column;
   border-left: 2px solid black;
   border-top: 2px solid black;
+  justify-content: start;
+  align-content: start;
+  width: fit-content;
+  gap:0;
+} */
+
+.books-grid {
+  display: flex;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  width: max-content
 }

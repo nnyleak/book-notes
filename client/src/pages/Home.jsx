@@ -39,14 +39,16 @@ function Home() {
   return (
     <div>
       <Nav />
-      <div className="books-grid">
-        {books.map((b) => (
-          <BookCard
-            key={b.id}
-            book={b}
-            onClick={() => navigate(`/book/${b.id}`)}
-          />
-        ))}
+      <div className="grid-wrapper">
+        <div className="books-grid">
+          {books.map((b) => (
+            <BookCard
+              key={b.id}
+              book={b}
+              onClick={() => navigate(`/book/${b.id}`)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
