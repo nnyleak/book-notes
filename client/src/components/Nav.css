@@ -1,8 +1,10 @@
-.sidebar {
-  flex-shrink: 0;
+.nav-container {
+  display: flex;
+  flex-direction: column;
   width: 190px;
   height: 100%;
   border-right: 2px solid black;
+  justify-content: space-between;
 }
 
 .logo {
@@ -24,4 +26,14 @@
 .icon {
   width: 16px;
   height: 16px;
+}
+
+#nnyleak {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#nnyleak:hover {
+  text-decoration: underline;
 }

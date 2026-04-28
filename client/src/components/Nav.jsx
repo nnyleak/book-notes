@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { isLoggedIn, logout } from "../auth";
 import "./Nav.css";
 import arrowIcon from "../assets/chevron-right-svgrepo-com.svg";
+import NavButton from "./NavButton";
 
 function Nav() {
   const navigate = useNavigate();
@@ -12,40 +13,31 @@ function Nav() {
   };
 
   return (
-    <div>
+    <div className="nav-container">
       <nav className="sidebar">
         <h1 className="logo">kae/archive</h1>
 
         <div className="nav-group">
           <p className="folder">/archive</p>
-          <button onClick={() => navigate("/")}>
-            <img className="icon" src={arrowIcon} alt="arrow icon" />
-            /home
-          </button>
-          {isLoggedIn() && (
-            <button onClick={() => navigate("/add")}>
-              <img className="icon" src={arrowIcon} alt="arrow icon" />
-              /add
-            </button>
-          )}
+          <NavButton navTo={"/"} text={"/home"} />
+          {isLoggedIn() && <NavButton navTo={"/add"} text={"/add"} />}
         </div>
 
         <div className="nav-group">
           <p className="folder">/account</p>
-          {!isLoggedIn() && (
-            <button onClick={() => navigate("/login")}>
-              <img className="icon" src={arrowIcon} alt="arrow icon" />
-              /login
-              </button>
-          )}
-          {isLoggedIn() && (
-            <button onClick={handleLogout}>
-              <img className="icon" src={arrowIcon} alt="arrow icon" />
-              /logout
-            </button>
-          )}
+          {isLoggedIn() && <NavButton navTo={"/logout"} text={"/logout"} />}
+          {!isLoggedIn() && <NavButton navTo={"/login"} text={"/login"} />}
         </div>
       </nav>
+      <div>
+        <p className="footer">
+          created by{" "}
+          <a id="nnyleak" href="https://nnyleak.netlify.app" target="_blank">
+            nnyleak
+          </a>
+          <br></br>© 2026
+        </p>
+      </div>
     </div>
   );
 }
