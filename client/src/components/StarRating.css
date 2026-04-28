@@ -1,0 +1,14 @@
+.star-rating {
+  display: flex;
+}
+
+.star {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.star:hover {
+  transform: scale(1.15);
+}

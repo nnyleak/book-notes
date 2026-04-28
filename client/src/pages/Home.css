@@ -1,14 +1,3 @@
-#root {
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.content {
-  display: flex;
-  height: 90dvh;
-  overflow: hidden;
-}
-
 .books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);

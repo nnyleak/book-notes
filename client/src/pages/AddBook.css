@@ -1,0 +1,67 @@
+.add-container {
+  align-content: left;
+  padding: 0 2rem;
+  overflow-y: auto;
+  width: 100%;
+}
+
+p {
+  color: #666;
+}
+
+.add-container input {
+  padding: 10px;
+  border: 2px solid black;
+  background: #fafafa;
+  margin-bottom: 10px;
+}
+
+.add-container button {
+  padding: 10px 14px;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+.add-container button:hover {
+  background: #f0f0f0;
+}
+
+.book-preview {
+  margin-top: 2rem;
+  border: 2px solid black;
+  padding: 1rem;
+  background: #fafafa;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-cover {
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
+  border: 2px solid black;
+}
+
+.edit-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+textarea {
+  min-height: 80px;
+  padding: 10px;
+  border: 2px solid black;
+  background: #fafafa;
+}
+
+.edit-fields input[type="number"] {
+  width: 120px;
+}

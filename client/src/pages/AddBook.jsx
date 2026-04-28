@@ -2,11 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getToken, isLoggedIn } from "../auth";
+import "./AddBook.css";
+import Nav from "../components/Nav";
+import StarRating from "../components/StarRating";
 
 function AddBook() {
   const [isbn, setIsbn] = useState("");
   const [bookData, setBookData] = useState(null);
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [dateFinished, setDateFinished] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,7 +24,7 @@ function AddBook() {
         isbn,
       });
       setBookData(res.data);
-      setRating("");
+      setRating(0);
       setReview("");
       setDateFinished("");
     } catch (err) {
@@ -58,53 +61,61 @@ function AddBook() {
   };
 
   return (
-    <div>
-      <h1>Add a Book</h1>
-      <input
-        placeholder="enter isbn"
-        value={isbn}
-        onChange={(e) => setIsbn(e.target.value)}
-      />
-      <button onClick={handleSearch}>
-        {loading ? "searching..." : "search"}
-      </button>
+    <div className="content">
+      <Nav />
+      <div className="add-container">
+        <h1>add book</h1>
+        <p>search for a book by isbn to archive!</p>
+        <input
+          placeholder="enter isbn"
+          value={isbn}
+          onChange={(e) => setIsbn(e.target.value)}
+        />
+        <button onClick={handleSearch}>
+          {loading ? "searching..." : "search"}
+        </button>
 
-      {bookData && (
-        <div className="book-preview">
-          {bookData.cover_url && (
-            <img src={bookData.cover_url} alt={`${bookData.title} cover`} />
-          )}
+        {bookData && (
+          <div className="book-preview">
+            {bookData.cover_url && (
+              <img className="book-cover" src={bookData.cover_url} alt={`${bookData.title} cover`} />
+            )}
 
-          <h2>{bookData.title}</h2>
-          <p>{bookData.author_name}</p>
-          <p>{bookData.description}</p>
+            <div className="book-info">
+              <h2>{bookData.title}</h2>
+              <p>{bookData.author_name}</p>
+              <p>{bookData.description}</p>
 
-          <div className="edit-fields">
-            <input
-              type="number"
-              min="1"
-              max="5"
-              placeholder="your rating (1-5)"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-            />
+              <div className="edit-fields">
+                {/* <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  placeholder="rating (1-5)"
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                /> */}
 
-            <textarea
-              placeholder="update review"
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-            />
+                <StarRating rating={rating} setRating={setRating} />
 
-            <input
-              type="date"
-              value={dateFinished}
-              onChange={(e) => setDateFinished(e.target.value)}
-            />
+                <textarea
+                  placeholder="update review"
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                />
+
+                <input
+                  type="date"
+                  value={dateFinished}
+                  onChange={(e) => setDateFinished(e.target.value)}
+                />
+              </div>
+
+              <button onClick={handleAdd}>add book</button>
+            </div>
           </div>
-
-          <button onClick={handleAdd}>add book</button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

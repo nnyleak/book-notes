@@ -2,6 +2,22 @@
   font-family: monospace;
 }
 
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.content {
+  display: flex;
+  height: 90dvh;
+  overflow: hidden;
+}
+
+h1 {
+  padding: 1rem 0;
+  margin: 0;
+}
+
 button {
   font-family: monospace;
   display: block;
@@ -12,10 +28,18 @@ button {
   cursor: pointer;
   color: #222;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 button:hover {
   text-decoration: underline;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
 }
 
 /* :root {
