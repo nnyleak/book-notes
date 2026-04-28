@@ -37,7 +37,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div className="content">
       <Nav />
       <div className="grid-wrapper">
         <div className="books-grid">
@@ -45,6 +45,7 @@ function Home() {
             <BookCard
               key={b.id}
               book={b}
+              index={books.indexOf(b)}
               onClick={() => navigate(`/book/${b.id}`)}
             />
           ))}

@@ -1,8 +1,12 @@
 import "./BookCard.css";
 
-function BookCard({book, onClick}) {
+function BookCard({book, index, onClick}) {
   return (
     <div className="book-card">
+      <div className="card-header">
+        {index !== undefined && <p className="index">0{index + 1}</p>}
+        {book.date_finished && <p className="date">{new Date(book.date_finished).toLocaleDateString()}</p>}
+      </div>
       {book.cover_url && (
         <img className="cover"
           src={book.cover_url}
