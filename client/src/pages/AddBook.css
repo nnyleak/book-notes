@@ -7,24 +7,30 @@
 
 p {
   color: #666;
+  margin: 0;
+  padding-bottom: 1rem;
 }
 
 .add-container input {
   padding: 10px;
-  border: 2px solid black;
+  border: 1px solid black;
   background: #fafafa;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
+}
+
+#arrow-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .add-container button {
-  padding: 10px 14px;
-  border: 2px solid black;
-  background: white;
+  margin-left: 1rem;
   cursor: pointer;
 }
 
 .add-container button:hover {
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
+  text-decoration: underline;
 }
 
 .book-preview {

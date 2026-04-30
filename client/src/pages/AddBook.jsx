@@ -5,6 +5,7 @@ import { getToken, isLoggedIn } from "../auth";
 import "./AddBook.css";
 import Nav from "../components/Nav";
 import StarRating from "../components/StarRating";
+import arrowIcon from "../assets/chevron-right-svgrepo-com.svg";
 
 function AddBook() {
   const [isbn, setIsbn] = useState("");
@@ -72,6 +73,7 @@ function AddBook() {
           onChange={(e) => setIsbn(e.target.value)}
         />
         <button onClick={handleSearch}>
+          <img src={arrowIcon} alt="arrow icon" id="arrow-icon" />
           {loading ? "searching..." : "search"}
         </button>
 
