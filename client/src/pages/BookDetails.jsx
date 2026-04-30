@@ -48,14 +48,12 @@ function BookDetails() {
           })}
       </p>
       <p>{book.review || "no review yet"}</p>
-        {isLoggedIn() && (
-            <div className="admin-actions">
-                <button onClick={() => navigate(`/book/${id}/edit`)}>edit entry</button>
-                <button onClick={handleDelete}>delete entry</button>
-            </div>
-        )}
-      {/* <button onClick={() => navigate(`/book/${id}/edit`)}>edit entry</button>
-      <button onClick={handleDelete}>delete entry</button> */}
+      {isLoggedIn() && (
+        <div className="admin-actions">
+          <button onClick={() => navigate(`/book/${id}/edit`)}>edit entry</button>
+          <button onClick={handleDelete}>delete entry</button>
+        </div>
+      )}
     </div>
   );
 }

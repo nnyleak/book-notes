@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getToken } from "../auth";
+import Nav from "../components/Nav";
 
 function EditBook() {
   const { id } = useParams();
@@ -25,34 +26,37 @@ function EditBook() {
 
   const handleSubmit = async () => {
     await axios
-      .put(`http://localhost:3000/books/${id}`, {
-        rating,
-        review,
-        date_finished: dateFinished,
-      }, {
-        headers: {
+      .put(
+        `http://localhost:3000/books/${id}`,
+        {
+          rating,
+          review,
+          date_finished: dateFinished,
+        },
+        {
+          headers: {
             Authorization: `Bearer ${getToken()}`,
-        }
-      })
+          },
+        },
+      )
       .then(() => navigate(`/book/${id}`))
       .catch((err) => console.error(err));
   };
 
   return (
-    <div onSubmit={handleSubmit}>
-      <input
-        type="number"
-        value={rating}
-        onChange={(e) => setRating(e.target.value)}
-      />
-      <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-      <input
-        type="date"
-        value={dateFinished}
-        onChange={(e) => setDateFinished(e.target.value)}
-      />
-      <button type="submit" onClick={handleSubmit}>save</button>
-      <button type="submit" onClick={() => navigate(`/book/${id}`)}>cancel</button>
+    <div className="content">
+      <Nav />
+      <div onSubmit={handleSubmit}>
+        <input type="number" value={rating} onChange={(e) => setRating(e.target.value)} />
+        <textarea value={review} onChange={(e) => setReview(e.target.value)} />
+        <input type="date" value={dateFinished} onChange={(e) => setDateFinished(e.target.value)} />
+        <button type="submit" onClick={handleSubmit}>
+          save
+        </button>
+        <button type="submit" onClick={() => navigate(`/book/${id}`)}>
+          cancel
+        </button>
+      </div>
     </div>
   );
 }

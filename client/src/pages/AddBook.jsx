@@ -89,15 +89,6 @@ function AddBook() {
               <p>{bookData.description}</p>
 
               <div className="edit-fields">
-                {/* <input
-                  type="number"
-                  min="1"
-                  max="5"
-                  placeholder="rating (1-5)"
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                /> */}
-
                 <StarRating rating={rating} setRating={setRating} />
 
                 <textarea
