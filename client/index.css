@@ -1,10 +1,8 @@
 :root {
   font-family: monospace;
-}
-
-#root {
   margin: 0 auto;
   padding: 2rem;
+  background-color: #e4c9b7;
 }
 
 .content {

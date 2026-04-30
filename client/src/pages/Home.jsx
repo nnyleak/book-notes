@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "../components/BookCard";
 import Nav from "../components/Nav";
-import { isLoggedIn, logout } from "../auth";
 import "./Home.css";
 
 function Home() {
