@@ -8,9 +8,9 @@
   margin: 0 0 1rem 0;
 }
 
-.add-container input {
+.isbn-input {
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   background: #fafafa;
   margin-bottom: 1rem;
 }
@@ -20,17 +20,7 @@
   height: 16px;
 }
 
-.add-container button {
-  margin-left: 1rem;
-  cursor: pointer;
-}
-
-.add-container button:hover {
-  text-decoration: underline;
-}
-
 .book-preview {
-  margin-top: 2rem;
   display: grid;
   grid-template-columns: 400px 1fr;
   gap: 4rem;
@@ -43,16 +33,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1.25rem;
+  padding: 10rem 1.25rem;
 }
 
 .cover-frame::before {
   content: "";
   position: absolute;
-  width: 310px;
-  height: 310px;
+  width: 340px;
+  height: 340px;
   border-radius: 50%;
-  background: rgb(235, 235, 235);
+  /* background: var(--primary-color); */
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -60,14 +50,15 @@
 }
 
 .book-cover {
-  width: 230px;
-  height: 340px;
+  width: 260px;
+  height: 370px;
   object-fit: cover;
 
   position: relative;
   z-index: 2;
 
-  box-shadow: 10px 10px 15px 3px rgb(128, 128, 128);
+  border: 1px solid var(--text-color);
+  box-shadow: 15px 15px 20px 0px rgba(50, 50, 50, 0.548);
 }
 
 .book-info {
@@ -76,16 +67,15 @@
 }
 
 .author {
-  color: #666;
+  color: var(--secondary-color);
   margin: 0;
   padding-bottom: 1rem;
 }
 
 .description-box {
-  /* max-width: 60ch; */
   padding: 1rem 0 1rem 0;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-top: 1px solid var(--secondary-color);
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 #description {
@@ -93,19 +83,34 @@
 }
 
 .edit-fields {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--text-color);
+  background: var(--primary-color);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 0.75rem;
+  box-shadow: 6px 6px 10px rgba(0,0,0,0.08);
 }
 
-textarea {
-  min-height: 80px;
-  padding: 10px;
-  border: 2px solid black;
-  background: #fafafa;
+.edit-title {
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
 }
 
-.edit-fields input[type="number"] {
-  width: 120px;
+.edit-fields textarea {
+  min-height: 110px;
+  padding: 12px;
+  border: 1px solid var(--text-color);
+  background: #fff;
+  resize: vertical;
+  font: inherit;
+}
+
+.edit-fields input[type="date"] {
+  padding: 8px;
+  border: 1px solid var(--text-color);
+  background: #fff;
+  font: inherit;
 }

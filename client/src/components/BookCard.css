@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 200px;
-  border-right: gray 1px solid;
+  border-right:  1px solid var(--secondary-color);
   padding-bottom: 1rem;
 }
 
@@ -17,7 +17,7 @@
   height: 230px;
   margin: 0 1rem;
   object-fit: cover;
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
 }
 
 .card-content {
@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--text-color);
 }
 
 .title {
@@ -35,7 +35,7 @@
 
 .author {
   margin: 3px 0;
-  color: #555;
+  color: var(--secondary-color);
 }
 
 .rating {

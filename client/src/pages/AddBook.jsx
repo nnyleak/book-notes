@@ -72,6 +72,7 @@ function AddBook() {
             <h1>add book</h1>
             <p id="header">search for a book by isbn to archive --</p>
             <input
+              className="isbn-input"
               placeholder="enter isbn"
               value={isbn}
               onChange={(e) => setIsbn(e.target.value)}
@@ -121,10 +122,12 @@ function AddBook() {
               )}
 
               <div className="edit-fields">
+                <h3 className="edit-title">REVIEW</h3>
+
                 <StarRating rating={rating} setRating={setRating} />
 
                 <textarea
-                  placeholder="update review"
+                  placeholder="review goes here"
                   value={review}
                   onChange={(e) => setReview(e.target.value)}
                 />

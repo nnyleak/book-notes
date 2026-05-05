@@ -2,6 +2,16 @@
   font-family: monospace;
   margin: 0 auto;
   padding: 2rem;
+
+  --bg-color: #FCF7DF;
+  --text-color: #3E3630;
+  --primary-color: #c7d3db;
+  --secondary-color: #a79a8a;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .content {
@@ -23,7 +33,7 @@ button {
   text-align: left;
   padding: 6px 0;
   cursor: pointer;
-  color: #222;
+  color: var(--text-color);
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -42,5 +52,6 @@ button:hover {
 #header {
   margin: 0 2rem 1rem 2rem;
   padding: 0.5rem 1rem;
-  background-color: rgb(220, 220, 220);
+  background-color: var(--text-color);
+  color: var(--primary-color);
 }

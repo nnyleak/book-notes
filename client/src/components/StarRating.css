@@ -1,5 +1,7 @@
 .star-rating {
   display: flex;
+  gap: 6px;
+  padding: 4px 0;
 }
 
 .star {
@@ -7,6 +9,7 @@
   height: 20px;
   cursor: pointer;
   transition: transform 0.1s ease;
+  color: var(--secondary-color);
 }
 
 .star:hover {
