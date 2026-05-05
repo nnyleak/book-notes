@@ -8,12 +8,6 @@
   margin: 0 0 1rem 0;
 }
 
-.book-info p {
-  color: #666;
-  margin: 0;
-  padding-bottom: 1rem;
-}
-
 .add-container input {
   padding: 10px;
   border: 1px solid black;
@@ -32,29 +26,37 @@
 }
 
 .add-container button:hover {
-  /* background: #f0f0f0; */
   text-decoration: underline;
 }
 
 .book-preview {
   margin-top: 2rem;
-  border: 2px solid black;
-  padding: 1rem;
-  background: #fafafa;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   gap: 10px;
 }
 
 .book-info {
   flex: 1;
+  margin-right: 5rem;
 }
 
 .book-cover {
   width: 250px;
   height: 350px;
   object-fit: cover;
-  border: 2px solid black;
+  margin: 5rem;
+}
+
+.author {
+  color: #666;
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+.description-box {
+  /* max-width: 60ch; */
+  margin-bottom: 1rem;
 }
 
 .edit-fields {

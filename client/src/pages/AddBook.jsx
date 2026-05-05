@@ -14,11 +14,13 @@ function AddBook() {
   const [review, setReview] = useState("");
   const [dateFinished, setDateFinished] = useState("");
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = async () => {
     setLoading(true);
     setBookData(null);
+    setExpanded(false);
 
     try {
       const res = await axios.post("http://localhost:3000/books/preview", {
@@ -65,28 +67,58 @@ function AddBook() {
     <div className="content">
       <Nav />
       <div className="add-container">
-        <h1>add book</h1>
-        <p id="header">search for a book by isbn to archive --</p>
-        <input
-          placeholder="enter isbn"
-          value={isbn}
-          onChange={(e) => setIsbn(e.target.value)}
-        />
-        <button onClick={handleSearch}>
-          <img src={arrowIcon} alt="arrow icon" id="arrow-icon" />
-          {loading ? "searching..." : "search"}
-        </button>
+        {!bookData && (
+          <>
+            <h1>add book</h1>
+            <p id="header">search for a book by isbn to archive --</p>
+            <input
+              placeholder="enter isbn"
+              value={isbn}
+              onChange={(e) => setIsbn(e.target.value)}
+            />
+            <button onClick={handleSearch}>
+              <img src={arrowIcon} alt="arrow icon" id="arrow-icon" />
+              {loading ? "searching..." : "search"}
+            </button>{" "}
+          </>
+        )}
 
         {bookData && (
           <div className="book-preview">
-            {bookData.cover_url && (
-              <img className="book-cover" src={bookData.cover_url} alt={`${bookData.title} cover`} />
-            )}
+            <div className="cover-frame">
+              {bookData.cover_url && (
+                <img
+                  className="book-cover"
+                  src={bookData.cover_url}
+                  alt={`${bookData.title} cover`}
+                />
+              )}
+            </div>
 
             <div className="book-info">
-              <h2>{bookData.title}</h2>
-              <p>{bookData.author_name}</p>
-              <p>{bookData.description}</p>
+              <h1>{bookData.title}</h1>
+              <p className="author">by {bookData.author_name}</p>
+              {bookData.description && (
+                <div className="description-box">
+                  <p id="description">
+                    {expanded
+                      ? bookData.description
+                      : `${bookData.description.slice(0, 500)}${
+                          bookData.description.length > 500 ? "..." : ""
+                        }`}
+                  </p>
+
+                  {bookData.description.length > 500 && (
+                    <button
+                      type="button"
+                      className="read-more"
+                      onClick={() => setExpanded(!expanded)}
+                    >
+                      {expanded ? "read less" : "read more"}
+                    </button>
+                  )}
+                </div>
+              )}
 
               <div className="edit-fields">
                 <StarRating rating={rating} setRating={setRating} />
@@ -104,7 +136,18 @@ function AddBook() {
                 />
               </div>
 
-              <button onClick={handleAdd}>add book</button>
+              <button onClick={handleAdd}>add "{bookData.title}"</button>
+              <button
+                onClick={() => {
+                  setBookData(null);
+                  setRating(0);
+                  setReview("");
+                  setDateFinished("");
+                  setExpanded(false);
+                }}
+              >
+                search another book
+              </button>
             </div>
           </div>
         )}
