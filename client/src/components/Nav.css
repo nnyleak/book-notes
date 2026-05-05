@@ -9,7 +9,9 @@
 }
 
 .folder {
-  color: #777;
+  background-color: rgb(220, 220, 220);
+  padding: 0.5rem;
+  margin: 0 1rem 0 0;
 }
 
 .nav-group button {

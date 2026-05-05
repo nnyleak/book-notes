@@ -66,7 +66,7 @@ function AddBook() {
       <Nav />
       <div className="add-container">
         <h1>add book</h1>
-        <p>search for a book by isbn to archive!</p>
+        <p id="header">search for a book by isbn to archive --</p>
         <input
           placeholder="enter isbn"
           value={isbn}

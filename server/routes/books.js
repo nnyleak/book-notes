@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // book search preview
-router.get("/preview", async (req, res) => {
+router.post("/preview", async (req, res) => {
     const { isbn } = req.body;
 
     try {
@@ -50,6 +50,9 @@ router.get("/preview", async (req, res) => {
 
         // extract relevant info for preview
         // for description
+        let workData = null;
+        let authorData = null;
+
         if (olData.works?.length > 0) {
             const workKey = olData.works[0].key;
             const workResp = await fetch(`${baseUrl}${workKey}.json`);

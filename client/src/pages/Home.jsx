@@ -39,6 +39,7 @@ function Home() {
     <div className="content">
       <Nav />
       <div className="grid-wrapper">
+        <p id="header">welcome to my book archive! ⋆˚꩜｡ here you'll find all the books i've read.</p>
         <div className="books-grid">
           {books.map((b) => (
             <BookCard
