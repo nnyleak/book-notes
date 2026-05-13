@@ -1,7 +1,5 @@
 :root {
   font-family: monospace;
-  margin: 0 auto;
-  padding: 2rem;
 
   --bg-color: #FCF7DF;
   --text-color: #3E3630;
@@ -12,11 +10,14 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  width: 75vw;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .content {
   display: flex;
-  height: 90dvh;
+  height: 92dvh;
   overflow: hidden;
 }
 

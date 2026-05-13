@@ -1,0 +1,32 @@
+.details-container {
+  display: grid;
+  gap: 2rem;
+  padding: 2rem;
+  grid-template-columns: 1fr 2fr;
+  overflow-y: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.cover-frame {
+  grid-column: 1 / 2;
+}
+
+.details-frame {
+  grid-column: 2/3;
+}
+
+.detail {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--text-color);
+  padding-bottom: 0.5rem;
+}
+
+.rating {
+    font-size: 1.5rem;
+}
+
+.review-container {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

@@ -104,12 +104,12 @@ function AddBook() {
                   <p id="description">
                     {expanded
                       ? bookData.description
-                      : `${bookData.description.slice(0, 500)}${
-                          bookData.description.length > 500 ? "..." : ""
+                      : `${bookData.description.slice(0, 1000)}${
+                          bookData.description.length > 1000 ? "..." : ""
                         }`}
                   </p>
 
-                  {bookData.description.length > 500 && (
+                  {bookData.description.length > 1000 && (
                     <button
                       type="button"
                       className="read-more"
@@ -121,7 +121,7 @@ function AddBook() {
                 </div>
               )}
 
-              <div className="edit-fields">
+              {/* <div className="edit-fields">
                 <h3 className="edit-title">REVIEW</h3>
 
                 <StarRating rating={rating} setRating={setRating} />
@@ -137,10 +137,11 @@ function AddBook() {
                   value={dateFinished}
                   onChange={(e) => setDateFinished(e.target.value)}
                 />
-              </div>
+              </div> */}
 
-              <button onClick={handleAdd}>add "{bookData.title}"</button>
+              <button id="add-btn" onClick={handleAdd}>add "{bookData.title}"</button>
               <button
+                id="search-another-btn"
                 onClick={() => {
                   setBookData(null);
                   setRating(0);
@@ -149,7 +150,7 @@ function AddBook() {
                   setExpanded(false);
                 }}
               >
-                search another book
+                search another
               </button>
             </div>
           </div>

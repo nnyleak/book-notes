@@ -46,16 +46,41 @@ function EditBook() {
   return (
     <div className="content">
       <Nav />
-      <div onSubmit={handleSubmit}>
-        <input type="number" value={rating} onChange={(e) => setRating(e.target.value)} />
-        <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-        <input type="date" value={dateFinished} onChange={(e) => setDateFinished(e.target.value)} />
-        <button type="submit" onClick={handleSubmit}>
-          save
-        </button>
-        <button type="submit" onClick={() => navigate(`/book/${id}`)}>
-          cancel
-        </button>
+
+      <div className="edit-container" onSubmit={handleSubmit}>
+        <div className="edit-card">
+          <h1>edit entry</h1>
+
+          <p className="edit-title">{book?.title}</p>
+
+          <form
+            className="edit-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <label>rating:</label>
+            <input type="number" min="0" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
+
+            <label>review:</label>
+            <textarea value={review} onChange={(e) => setReview(e.target.value)}></textarea>
+
+            <label>date finished:</label>
+            <input
+              type="date"
+              value={dateFinished}
+              onChange={(e) => setDateFinished(e.target.value)}
+            />
+
+            <div className="form-actions">
+              <button type="submit">save</button>
+              <button type="button" onClick={() => navigate(`/book/${id}`)}>
+                cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -20,11 +20,11 @@
   height: 16px;
 }
 
-.book-preview {
+/* .book-preview {
   display: grid;
   grid-template-columns: 400px 1fr;
   gap: 4rem;
-  align-items: start;
+  align-items: center;
   position: relative;
 }
 
@@ -42,7 +42,7 @@
   width: 340px;
   height: 340px;
   border-radius: 50%;
-  /* background: var(--primary-color); */
+  background: var(--primary-color);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -80,6 +80,21 @@
 
 #description {
   white-space: pre-line;
+}
+
+#add-btn, #search-another-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--secondary-color);
+  color: var(--text-color);
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.3s ease;
+} */
+
+#add-btn:hover, #search-another-btn:hover {
+  background: var(--primary-color);
 }
 
 .edit-fields {
