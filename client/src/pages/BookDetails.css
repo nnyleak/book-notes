@@ -10,6 +10,8 @@
 
 .cover-frame {
   grid-column: 1 / 2;
+  border: 1px solid var(--text-color);
+  padding: 0.5rem;
 }
 
 .details-frame {
