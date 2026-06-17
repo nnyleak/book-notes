@@ -56,17 +56,20 @@ live demo → link
     npm install
     ```
 
-5. run locally
+5. create demo admin account
 
-    in one terminal (server):
     ```bash
-    cd server
-    node index.js
+    cd book-notes
+    npm run seed-admin
     ```
 
-    in another terminal (client):
+    username: admin
+    password: admin123
+
+5. run locally
+
     ```bash
-    cd client
+    cd book-notes
     npm run dev
     ```
 
