@@ -20,7 +20,7 @@ function AddBook() {
     setExpanded(false);
 
     try {
-      const res = await axios.post('${API_URL}/books/preview', { isbn });
+      const res = await axios.post(`${API_URL}/books/preview`, { isbn });
       setBookData(res.data);
     } catch (err) {
       console.error(err);
