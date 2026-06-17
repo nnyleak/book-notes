@@ -74,9 +74,9 @@ live demo → link
     ```
 
     open [http://localhost:5173](http://localhost:5173) in your browser!\
-    admin account:\
-    username: admin\
-    password: admin123
+    > admin account:\
+    > username: admin\
+    > password: admin123
 
 ## ⭑ notes
 
