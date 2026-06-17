@@ -1,18 +1,14 @@
 import "./BookCard.css";
 import arrowIcon from "../assets/chevron-right-svgrepo-com.svg";
 
-function BookCard({book, index, onClick}) {
-const handleStars = (rating) => {
-  const stars = [];
-  for (let i = 0; i < 5; i++) {
-    if (i < rating) {
-      stars.push("★");
-    } else {
-      stars.push("☆");
+function BookCard({ book, index, onClick }) {
+  const handleStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(i < rating ? "★" : "☆");
     }
-  }
-  return stars;
-}
+    return stars;
+  };
 
   return (
     <div className="book-card">

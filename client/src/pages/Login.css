@@ -1,0 +1,39 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 92dvh;
+  max-width: 320px;
+}
+
+.login-page h1 {
+  margin-bottom: 0.25rem;
+}
+
+.login-page p {
+  margin: 0 0 2rem 0;
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
+
+.login-page input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--text-color);
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  margin-bottom: 0.75rem;
+  box-sizing: border-box;
+}
+
+.login-page input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+.login-page button {
+  margin-top: 0.5rem;
+}

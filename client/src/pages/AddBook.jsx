@@ -1,18 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getToken, isLoggedIn } from "../auth";
+import { getToken } from "../auth";
 import "./AddBook.css";
+import "./BookDetails.css";
 import Nav from "../components/Nav";
-import StarRating from "../components/StarRating";
 import arrowIcon from "../assets/chevron-right-svgrepo-com.svg";
 
 function AddBook() {
   const [isbn, setIsbn] = useState("");
   const [bookData, setBookData] = useState(null);
-  const [rating, setRating] = useState(0);
-  const [review, setReview] = useState("");
-  const [dateFinished, setDateFinished] = useState("");
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
@@ -23,16 +20,15 @@ function AddBook() {
     setExpanded(false);
 
     try {
-      const res = await axios.post("http://localhost:3000/books/preview", {
-        isbn,
-      });
+      const res = await axios.post("http://localhost:3000/books/preview", { isbn });
       setBookData(res.data);
-      setRating(0);
-      setReview("");
-      setDateFinished("");
     } catch (err) {
       console.error(err);
-      alert("book not found");
+      if (err.response?.status === 404) {
+        alert("book not found");
+      } else {
+        alert("search timed out — try again");
+      }
     }
 
     setLoading(false);
@@ -40,23 +36,22 @@ function AddBook() {
 
   const handleAdd = async () => {
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:3000/books",
         {
           isbn,
           ...bookData,
-          rating: Number(rating),
-          review,
-          date_finished: dateFinished || null,
+          rating: 0,
+          review: "",
+          date_finished: null,
         },
         {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
+          headers: { Authorization: `Bearer ${getToken()}` },
         },
       );
 
-      navigate("/");
+      const newBook = res.data[0];
+      navigate(`/book/${newBook.id}/edit`);
     } catch (err) {
       console.error(err.response);
       alert("failed to add book");
@@ -80,36 +75,34 @@ function AddBook() {
             <button onClick={handleSearch}>
               <img src={arrowIcon} alt="arrow icon" id="arrow-icon" />
               {loading ? "searching..." : "search"}
-            </button>{" "}
+            </button>
           </>
         )}
 
         {bookData && (
-          <div className="book-preview">
+          <div className="details-container">
             <div className="cover-frame">
               {bookData.cover_url && (
-                <img
-                  className="book-cover"
-                  src={bookData.cover_url}
-                  alt={`${bookData.title} cover`}
-                />
+                <img src={bookData.cover_url} alt={`${bookData.title} cover`} />
               )}
             </div>
 
-            <div className="book-info">
-              <h1>{bookData.title}</h1>
-              <p className="author">by {bookData.author_name}</p>
+            <div className="details-frame">
+              <h2>TITLE:</h2>
+              <p className="detail">{bookData.title}</p>
+              <h2>AUTHOR:</h2>
+              <p className="detail">{bookData.author_name}</p>
               {bookData.description && (
-                <div className="description-box">
-                  <p id="description">
+                <div className="description-box detail">
+                  <h2>DESCRIPTION:</h2>
+                  <p className="description">
                     {expanded
                       ? bookData.description
-                      : `${bookData.description.slice(0, 1000)}${
-                          bookData.description.length > 1000 ? "..." : ""
+                      : `${bookData.description.slice(0, 400)}${
+                          bookData.description.length > 400 ? "..." : ""
                         }`}
                   </p>
-
-                  {bookData.description.length > 1000 && (
+                  {bookData.description.length > 400 && (
                     <button
                       type="button"
                       className="read-more"
@@ -120,38 +113,15 @@ function AddBook() {
                   )}
                 </div>
               )}
+            </div>
 
-              {/* <div className="edit-fields">
-                <h3 className="edit-title">REVIEW</h3>
-
-                <StarRating rating={rating} setRating={setRating} />
-
-                <textarea
-                  placeholder="review goes here"
-                  value={review}
-                  onChange={(e) => setReview(e.target.value)}
-                />
-
-                <input
-                  type="date"
-                  value={dateFinished}
-                  onChange={(e) => setDateFinished(e.target.value)}
-                />
-              </div> */}
-
-              <button id="add-btn" onClick={handleAdd}>add "{bookData.title}"</button>
-              <button
-                id="search-another-btn"
-                onClick={() => {
-                  setBookData(null);
-                  setRating(0);
-                  setReview("");
-                  setDateFinished("");
-                  setExpanded(false);
-                }}
-              >
-                search another
-              </button>
+            <div className="review-container">
+              <div className="admin-actions">
+                <button onClick={handleAdd}>add "{bookData.title}"</button>
+                <button onClick={() => { setBookData(null); setExpanded(false); }}>
+                  search another
+                </button>
+              </div>
             </div>
           </div>
         )}

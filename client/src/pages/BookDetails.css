@@ -6,6 +6,7 @@
   overflow-y: auto;
   align-items: center;
   justify-items: center;
+  width: 100%;
 }
 
 .cover-frame {
@@ -14,14 +15,21 @@
   padding: 0.5rem;
 }
 
+.cover-frame img {
+  width: 250px;
+  height: auto;
+}
+
 .details-frame {
   grid-column: 2/3;
+  width: 100%;
 }
 
 .detail {
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--text-color);
   padding-bottom: 0.5rem;
+  
 }
 
 .rating {
@@ -31,4 +39,14 @@
 .review-container {
   grid-column-start: 1;
   grid-column-end: 3;
+  width: 100%;
+}
+
+.date {
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.description {
+  white-space: pre-line;
 }

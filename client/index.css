@@ -56,3 +56,27 @@ button:hover {
   background-color: var(--text-color);
   color: var(--primary-color);
 }
+
+/* webkit browsers (chrome, edge, safari) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color);
+}
+
+/* firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-color) transparent;
+}

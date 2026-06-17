@@ -85,7 +85,10 @@ function BookDetails() {
         <div className="review-container">
           <h3>my thoughts:</h3>
 
-          <p>
+          <p>{book.review || "no review yet"}</p>
+
+          <p className="date">
+            finished on{" "}
             {book.date_finished &&
               new Date(book.date_finished).toLocaleDateString("en-US", {
                 month: "long",
@@ -93,8 +96,6 @@ function BookDetails() {
                 year: "numeric",
               })}
           </p>
-
-          <p>{book.review || "no review yet"}</p>
 
           {isLoggedIn() && (
             <div className="admin-actions">

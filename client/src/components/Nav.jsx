@@ -25,14 +25,19 @@ function Nav() {
 
         <div className="nav-group">
           <p className="folder">/account</p>
-          {isLoggedIn() && <NavButton navTo={"/logout"} text={"/logout"} />}
+          {isLoggedIn() && (
+            <button onClick={handleLogout}>
+              <img className="icon" src={arrowIcon} alt="arrow icon" />
+              /logout
+            </button>
+          )}
           {!isLoggedIn() && <NavButton navTo={"/login"} text={"/login"} />}
         </div>
       </nav>
       <div>
         <p className="footer">
           created by{" "}
-          <a id="nnyleak" href="https://nnyleak.netlify.app" target="_blank">
+          <a id="nnyleak" href="https://nnyleak.netlify.app" target="_blank" rel="noopener noreferrer">
             nnyleak
           </a>
           <br></br>© 2026
