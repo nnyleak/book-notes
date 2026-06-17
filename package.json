@@ -1,0 +1,25 @@
+{
+  "name": "book-notes",
+  "version": "1.0.0",
+  "description": "kae.archive",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed-admin": "npm --prefix server run seed-admin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nnyleak/book-notes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nnyleak/book-notes/issues"
+  },
+  "homepage": "https://github.com/nnyleak/book-notes#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
