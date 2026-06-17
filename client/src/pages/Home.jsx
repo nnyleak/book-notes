@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../auth";
 import BookCard from "../components/BookCard";
 import Nav from "../components/Nav";
 import "./Home.css";
@@ -50,7 +51,7 @@ function Home() {
     setError(null);
 
     axios
-      .get("http://localhost:3000/books")
+      .get(`${API_URL}/books`)
       .then((res) => {
         setBooks(res.data);
         setLoading(false);

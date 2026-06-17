@@ -73,8 +73,8 @@ live demo → link
     npm run dev
     ```
 
-    open [http://localhost:5173](http://localhost:5173) in your browser!\
-    > admin account:\
+    open [http://localhost:5173](http://localhost:5173) in your browser!
+    > admin account\
     > username: admin\
     > password: admin123
 

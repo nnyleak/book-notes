@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "../auth";
+import { getToken, API_URL } from "../auth";
 import "./AddBook.css";
 import "./BookDetails.css";
 import Nav from "../components/Nav";
@@ -20,7 +20,7 @@ function AddBook() {
     setExpanded(false);
 
     try {
-      const res = await axios.post("http://localhost:3000/books/preview", { isbn });
+      const res = await axios.post('${API_URL}/books/preview', { isbn });
       setBookData(res.data);
     } catch (err) {
       console.error(err);

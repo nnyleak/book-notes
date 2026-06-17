@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getToken, isLoggedIn } from "../auth";
+import { getToken, isLoggedIn, API_URL } from "../auth";
 import Nav from "../components/Nav";
 import "./BookDetails.css";
 
@@ -13,7 +13,7 @@ function BookDetails() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/books/${id}`)
+      .get(`${API_URL}/books/${id}`)
       .then((res) => setBook(res.data))
       .catch((err) => console.error(err));
   }, [id]);
@@ -22,7 +22,7 @@ function BookDetails() {
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:3000/books/${id}`, {
+      .delete(`${API_URL}/books/${id}`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

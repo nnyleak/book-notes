@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getToken } from "../auth";
+import { getToken, API_URL } from "../auth";
 import Nav from "../components/Nav";
 import StarRating from "../components/StarRating";
 import "./BookDetails.css";
@@ -18,7 +18,7 @@ function EditBook() {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/books/${id}`).then((res) => {
+    axios.get(`${API_URL}/books/${id}`).then((res) => {
       const data = res.data;
       setBook(data);
       setRating(data.rating || 0);
@@ -31,7 +31,7 @@ function EditBook() {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:3000/books/${id}`,
+        `${API_URL}/books/${id}`,
         { rating, review, date_finished: dateFinished },
         { headers: { Authorization: `Bearer ${getToken()}` } },
       );
