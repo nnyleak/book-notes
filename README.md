@@ -1,6 +1,6 @@
 ## kae/archive
 
-a personal book archiving app for the books i've read, made with react! deployed on ___.
+a personal book archiving site for the books i've read, made with react! deployed on ___.
 
 live demo → link
 
