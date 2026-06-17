@@ -42,7 +42,7 @@ live demo → link
     SECRET=your_jwt_secret
     ```
 
-3. run the sql schema in schema.sql to initialize the database
+3. run the sql schema in [schema.sql](schema.sql) to initialize the database
 
 4. install dependencies
 
