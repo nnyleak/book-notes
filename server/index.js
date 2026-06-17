@@ -8,7 +8,7 @@ import booksRoutes from "./routes/books.js";
 import authRoutes from "./routes/auth.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
