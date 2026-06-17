@@ -1,12 +1,10 @@
-## kae/archive
+# kae/archive
 
-a personal book archiving site for the books i've read, made with react! deployed on ___.
+a personal book archiving site for the books i've read, made with react, express, and postgresql! deployed on ___.
 
 live demo → link
 
----
-
-### **ᯓ★** features
+## ⭑ features
 
 - browse the book archive with cover art, ratings, and quick-view cards
 - sort by recently added, date finished, alphabetical, or rating
@@ -16,31 +14,22 @@ live demo → link
 - add, edit, and delete entries
 - protected by jwt authentication
 
----
+## ⭑ tech stack
 
-### **ᯓ★** tech stack
-
-**frontend**
-- react 19 + react router v7
-- axios
+- react
 - vite
-
-**backend**
-- node.js + express 5
-- postgresql (via `postgres`)
-- jwt + bcrypt for auth
-
-**external api**
+- node.js + express
+- postgresql/supabase
+- jwt authentication
+- custom css
 - [open library](https://openlibrary.org/developers/api) — book metadata by isbn
 
----
-
-### **ᯓ★** usage
+## ⭑ usage
 
 1. clone this repo
 
     ```bash
-    git clone https://github.com/yourusername/book-notes.git
+    git clone https://github.com/nnyleak/book-notes.git
     cd book-notes
     ```
 
@@ -53,7 +42,10 @@ live demo → link
     SECRET=your_jwt_secret
     ```
 
-3. install dependencies
+3. initialize the database
+   run the sql schema in schema.sql
+
+4. install dependencies
 
     ```bash
     # server
@@ -61,11 +53,11 @@ live demo → link
     npm install
 
     # client
-    cd ../client
+    cd client
     npm install
     ```
 
-4. run locally
+5. run locally
 
     in one terminal (server):
     ```bash
@@ -81,12 +73,17 @@ live demo → link
 
     open [http://localhost:5173](http://localhost:5173) in your browser
 
----
-
-### **ᯓ★** notes
+## ⭑ notes
 
 - book data is fetched from the Open Library api using isbn, i've experienced that it can be unreliable and not all isbns will return results, and response time may vary
-- in the future, i would like to swap to Google Books API and use Open Library as a fallback
 - only one admin account is supported; login credentials are managed directly in the database
 - the app is read-only for guests
 - adding, editing, and deleting entries requires logging in
+
+## ⭑ future improvements
+
+- swap to Google Books API, use Open Library as fallback
+- search by book title and/or author
+- book genres
+- user accounts
+- custom collections
