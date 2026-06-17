@@ -26,6 +26,9 @@ live demo → link
 
 ## ⭑ usage
 
+> [!NOTE]
+> you will need to have PostgreSQL and pgAdmin 4
+
 1. clone this repo
 
     ```bash
@@ -63,9 +66,6 @@ live demo → link
     npm run seed-admin
     ```
 
-    username: admin
-    password: admin123
-
 5. run locally
 
     ```bash
@@ -73,7 +73,10 @@ live demo → link
     npm run dev
     ```
 
-    open [http://localhost:5173](http://localhost:5173) in your browser
+    open [http://localhost:5173](http://localhost:5173) in your browser!\
+    admin account:\
+    username: admin\
+    password: admin123
 
 ## ⭑ notes
 
