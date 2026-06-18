@@ -21,8 +21,15 @@ live demo → [kae/archive](https://kae-archive.vercel.app/)
 - node.js + express
 - postgresql/supabase
 - jwt authentication
+- axios
 - custom css
 - [open library](https://openlibrary.org/developers/api) — book metadata by isbn
+
+## ⭑ screenshots
+
+![homepage](./client/src/assets/project-ss1.png)
+![details page](./client/src/assets/project-ss2.png)
+![add/edit page](./client/src/assets/project-ss3.png)
 
 ## ⭑ usage
 
@@ -59,7 +66,7 @@ live demo → [kae/archive](https://kae-archive.vercel.app/)
     npm install
     ```
 
-5. create demo admin account
+5. create local admin account
 
     ```bash
     cd book-notes
@@ -81,14 +88,14 @@ live demo → [kae/archive](https://kae-archive.vercel.app/)
 ## ⭑ notes
 
 - book data is fetched from the open library, i've experienced that it can be unreliable and not all isbns will return results. response times may vary greatly
-- only one admin account is supported; login credentials are managed directly in the database
 - the app is read-only for guests
 - adding, editing, and deleting entries requires logging in
 
 ## ⭑ future improvements
 
 - swap to Google Books API, use Open Library as fallback
-- search by book title and/or author
-- include/sort book genres
+- responsive/mobile layout
+- caching for external api responses
+- more search/filtering options (search by title, author, genre, etc)
 - user accounts
 - custom collections
