@@ -1,8 +1,8 @@
 # kae/archive
 
-a personal book archiving site for the books i've read, made with react, express, and postgresql! deployed on ___.
+a personal book archiving site for the books i've read, made with react, express, and postgresql! deployed on vercel, backend on render.
 
-live demo → link
+live demo → [kae/archive](https://kae-archive.vercel.app/)
 
 ## ⭑ features
 
@@ -80,7 +80,7 @@ live demo → link
 
 ## ⭑ notes
 
-- book data is fetched from the Open Library api using isbn, i've experienced that it can be unreliable and not all isbns will return results, and response time may vary
+- book data is fetched from the open library, i've experienced that it can be unreliable and not all isbns will return results. response times may vary greatly
 - only one admin account is supported; login credentials are managed directly in the database
 - the app is read-only for guests
 - adding, editing, and deleting entries requires logging in
@@ -89,6 +89,6 @@ live demo → link
 
 - swap to Google Books API, use Open Library as fallback
 - search by book title and/or author
-- book genres
+- include/sort book genres
 - user accounts
 - custom collections
